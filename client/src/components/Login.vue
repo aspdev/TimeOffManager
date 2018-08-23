@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="container center-div">
-    <form autocomplete="off">
+    <form autocomplete="on">
     <div @mousedown="setLabelToNull" class="row">
         <b-input class="inputfield" v-model="email" type="email" name="email" placeholder="email"/>
     </div>
