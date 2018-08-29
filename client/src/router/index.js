@@ -4,7 +4,8 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Form from '@/components/Form'
 import Print from '@/components/Print'
-// import store from '@/store/store'
+import Reset from '@/components/Reset'
+import AuthenticatePasswordReset from '@/components/AuthenticatePasswordReset'
 
 Vue.use(Router)
 
@@ -38,6 +39,16 @@ export default new Router({
       name: 'Form',
       component: Form,
       meta: {requiresAuth: true}
+    },
+    {
+      path: '/reset',
+      name: 'Reset',
+      component: Reset
+    },
+    {
+      path: '/setnewpassword/:resetpasswordtoken/',
+      name: 'SetNewPassword',
+      component: AuthenticatePasswordReset
     }
   ]
 })

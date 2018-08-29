@@ -16,6 +16,11 @@ module.exports = {
     }
   },
   authentication: {
-    jwtSecret: process.env.JWT_SECRET || 'secret'
+    jwtSecret: process.env.JWT_SECRET || 's#d@vbi4Lz32897'
+  },
+  emailService: {
+    host: process.env.HOST || 'smtp.localhost',
+    port: process.env.PORT || 25,
+    emailFrom: process.env.EMAIL_FROM || 'office@simplito.com'
   }
 }

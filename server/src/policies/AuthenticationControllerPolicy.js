@@ -32,7 +32,7 @@ module.exports = {
             break
           case 'password':
             res.status(400).send({
-              error: 'The password must be 8-32 charachters in length'
+              error: 'The password must be 8-32 characters in length'
             })
             break
           case 'confirmPassword':

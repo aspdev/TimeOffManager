@@ -12,20 +12,20 @@
         <b-button @click="login" class="btn btn-danger float-right btn-Login btn-sm">Login</b-button>
     </div>
     <div class="row">
-      <div class="container">
+      <div class="container col">
        <div class="form-check">
          <input type="checkbox" v-model="rememberMe" class="form-check-input" id="rememberMe">
-         <label class="form-check-label rememberMeCheckbox" for="rememberMe">Rememer Me</label>
+         <label class="form-check-label rememberMeCheckbox" for="rememberMe">Remember Me</label>
        </div>
       </div>
     </div>
     <div class="row">
-      <div class="container loginLabelContainer">
-        <label class="loginLabel">A newbie to Simplito Team?</label>
+      <div class="container forgotPasswordContainer">
+        <a class="forgotPassword" href="/reset">Forgot your password?</a>
       </div>
     </div>
     <div class="row">
-      <b-button @click="navigateTo({ name: 'Register'})" class="btn btn-primary float-left btn-Register btn-sm">Register</b-button>
+      <b-button @click="navigateTo({ name: 'Register'})" class="btn btn-primary float-left btn-Register btn-sm">Create Account</b-button>
     </div>
     <div class="row">
       <div class="container error">
@@ -104,6 +104,7 @@ export default {
   .btn-Register {
       width: 300px;
       margin-bottom: 20px;
+      margin-top: 15px;
 
   }
   .btn-Login {
@@ -116,15 +117,28 @@ export default {
      margin-bottom: 10px;
   }
   .loginLabel {
-
      font-family: Verdana;
      font-size: 12px;
      color:darkcyan;
-
+  }
+  .forgotPasswordContainer {
+    font-family: Verdana;
+    float: right;
   }
   .loginLabelContainer {
     margin-bottom: 10px;
     margin-top: 20px;
   }
-
-  </style>
+  .forgotPassword {
+    color: darkcyan;
+    font-size: 12px;
+    text-decoration: none;
+  }
+  .forgotPasswordContainer{
+    margin-top: 10px;
+  }
+  .rememberMeCheckbox {
+    color: darkcyan;
+    font-size: 14px;
+  }
+ </style>

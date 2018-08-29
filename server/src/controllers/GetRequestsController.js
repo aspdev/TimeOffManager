@@ -1,6 +1,7 @@
 const { Form } = require('../models')
 const { User } = require('../models')
 const Sequelize = require('../models/Index').Sequelize
+const config = require('../config/config')
 const moment = require('moment')
 
 const Op = Sequelize.Op
@@ -8,6 +9,12 @@ const Op = Sequelize.Op
 module.exports = {
   async getRequests (req, res) {
     try {
+      if (req.headers.authorization === undefined || (req.headers.authorization !== config.authentication.jwtSecret)) {
+        res.status(403).send({
+          message: 'Access denied. Unauthorized request'
+        })
+        return
+      }
       var dateFrom = req.params.dateFrom
       if (dateFrom) {
         if (moment(req.params.dateFrom, 'YYYYMMDD', true).isValid()) {

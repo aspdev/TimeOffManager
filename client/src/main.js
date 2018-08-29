@@ -13,6 +13,8 @@ import Register from './components/Register'
 import Form from './components/Form'
 import Print from './components/Print'
 import VueSweetalert2 from 'vue-sweetalert2'
+import Reset from './components/Reset'
+import AuthenticatePasswordReset from './components/AuthenticatePasswordReset'
 
 Vue.config.productionTip = false
 
@@ -54,7 +56,9 @@ new Vue({
     Login,
     Register,
     Form,
-    Print
+    Print,
+    Reset,
+    AuthenticatePasswordReset
   },
   beforeCreate () {
     this.$store.commit('initialiseStore')

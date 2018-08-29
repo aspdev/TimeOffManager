@@ -192,8 +192,21 @@ export default {
         this.getRecordedRequests()
         this.submitSuccess()
       } catch (error) {
+        if (error.response.data.error === 'jwt expired') {
+          this.logout()
+          this.sessionExpired()
+          return
+        }
         this.submitFailure(error.response.data.error)
       }
+    },
+    sessionExpired () {
+      this.$swal({
+        title: 'Session expired',
+        text: 'The action was aborted. Login and try again',
+        type: 'info',
+        confirmButtonColor: '#808080'
+      })
     },
     submitFailure (message) {
       this.$swal({
@@ -211,27 +224,26 @@ export default {
       })
     },
     confirmDelete (formId) {
+      // TODO: sprawdzić czy sesja wygasła
       this.$swal({
         title: 'Are you sure?',
-        text: 'You can\'t revert this action',
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes',
         cancellButtonText: 'Cancel',
         confirmButtonColor: '#dc3545',
-        cancelButtonColor: '#808080',
-        showCloseButton: true
+        cancelButtonColor: '#808080'
       }).then((result) => {
         if (result.value) {
           this.deleteRow(formId)
           this.$swal({
-            text: 'Deleted',
+            title: 'Deleted',
             type: 'info',
             confirmButtonColor: '#808080'
           })
         } else {
           this.$swal({
-            text: 'Cancelled',
+            title: 'Cancelled',
             type: 'info',
             confirmButtonColor: '#808080'
           })
@@ -246,7 +258,10 @@ export default {
           this.setMessageToNull()
         }
       } catch (error) {
-
+        if (error.response.data.error === 'jwt expired') {
+          this.logout()
+          this.sessionExpired()
+        }
       }
     },
     updateSuccess (message) {
@@ -275,6 +290,11 @@ export default {
           this.message = 'No data has been updated'
         }
       } catch (error) {
+        if (error.response.data.error === 'jwt expired') {
+          this.logout()
+          this.sessionExpired()
+          return
+        }
         const index = this.tableData.findIndex((request) => request.formId === object.formId)
         this.tableData[index].dateFrom = error.response.data.unupdatedRequest.dateFrom
         this.tableData[index].dateTo = error.response.data.unupdatedRequest.dateTo
@@ -305,6 +325,11 @@ export default {
             })
         }
       } catch (error) {
+        if (error.response.data.error === 'jwt expired') {
+          this.logout()
+          this.sessionExpired()
+          return
+        }
         this.message = error.response.data.error
       }
     },

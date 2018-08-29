@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
 function jwtSignUser (user) {
-  const ONE_WEEK = 60 * 60 * 24 * 7
+  const TTL = 60 * 60
   return jwt.sign(user, config.authentication.jwtSecret, {
-    expiresIn: ONE_WEEK
+    expiresIn: TTL
   })
 }
 
@@ -17,7 +17,7 @@ module.exports = {
       res.send(userJson)
     } catch (err) {
       res.status(400).send({
-        message: 'This email account is already in use'
+        error: 'This email account is already in use'
       })
     }
   },
@@ -32,9 +32,7 @@ module.exports = {
           error: 'Invalid email or password'
         })
       }
-
       const isPasswordValid = await user.comparePassword(password)
-      console.log('Is password valid: ', isPasswordValid)
       if (!isPasswordValid) {
         res.status(403).send({
           error: 'Invalid email or password'
